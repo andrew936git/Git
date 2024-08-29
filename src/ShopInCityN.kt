@@ -35,7 +35,7 @@ class ShopInCityN(
 
     override suspend fun buyingPhone(name: String){
         val sum: Int
-        var text = ""
+        val text: String
         when (name) {
             PhonePriceInCityN.MODEL1.value -> {
                 val count = dataBase[name]
