@@ -1,7 +1,9 @@
+import kotlinx.coroutines.delay
+
 class ShopInCityN(
-    private var allSum: Int
+    var allSum: Int
 ) : ISellingPhones {
-    private val dataBase = mutableMapOf(
+    val dataBase = mutableMapOf(
         PhonePriceInCityN.MODEL1.value to 0,
         PhonePriceInCityN.MODEL2.value to 0,
         PhonePriceInCityN.MODEL3.value to 0,
@@ -31,8 +33,8 @@ class ShopInCityN(
         }
     }
 
-    override fun buyingPhone(name: String): String {
-        var sum = 0
+    override suspend fun buyingPhone(name: String){
+        val sum: Int
         var text = ""
         when (name) {
             PhonePriceInCityN.MODEL1.value -> {
@@ -43,7 +45,7 @@ class ShopInCityN(
                     dataBase[name] = count + 1
                 }
                 text = """Вы выбрали $name,
-                    | сумма покупки = $sum """.trimMargin()
+                    | сумма покупки = $sum р. """.trimMargin()
             }
 
             PhonePriceInCityN.MODEL2.value -> {
@@ -54,7 +56,7 @@ class ShopInCityN(
                     dataBase[name] = count + 1
                 }
                 text = """Вы выбрали $name,
-                    | сумма покупки = $sum """.trimMargin()
+                    | сумма покупки = $sum р.""".trimMargin()
             }
 
             PhonePriceInCityN.MODEL3.value -> {
@@ -65,7 +67,7 @@ class ShopInCityN(
                     dataBase[name] = count + 1
                 }
                 text = """Вы выбрали $name,
-                    | сумма покупки = $sum """.trimMargin()
+                    | сумма покупки = $sum р.""".trimMargin()
             }
 
             PhonePriceInCityN.MODEL4.value -> {
@@ -76,7 +78,7 @@ class ShopInCityN(
                     dataBase[name] = count + 1
                 }
                 text = """Вы выбрали $name,
-                    | сумма покупки = $sum """.trimMargin()
+                    | сумма покупки = $sum р.""".trimMargin()
             }
 
             PhonePriceInCityN.MODEL5.value -> {
@@ -86,10 +88,25 @@ class ShopInCityN(
                 if (count != null) {
                     dataBase[name] = count + 1
                 }
+                text = """Вы выбрали $name,
+                    | сумма покупки = $sum р.""".trimMargin()
             }
 
             else -> text = "Такого телефона не существует!"
         }
-        return text
+        println(text)
+        delay(1000L)
+    }
+
+    override suspend fun salesStatistics(){
+        println("""Общая сумма продажи телефонов = $allSum р.
+                |кол-во проданых телефонов:
+                |${PhonePriceInCityK.MODEL1.value} - ${dataBase[PhonePriceInCityK.MODEL1.value]}шт.
+                |${PhonePriceInCityK.MODEL2.value} - ${dataBase[PhonePriceInCityK.MODEL2.value]}шт.
+                |${PhonePriceInCityK.MODEL3.value} - ${dataBase[PhonePriceInCityK.MODEL3.value]}шт.
+                |${PhonePriceInCityK.MODEL4.value} - ${dataBase[PhonePriceInCityK.MODEL4.value]}шт.
+                |${PhonePriceInCityK.MODEL5.value} - ${dataBase[PhonePriceInCityK.MODEL5.value]}шт.
+            """.trimMargin())
+        delay(5000L)
     }
 }

@@ -1,5 +1,5 @@
 interface ISellingPhones {
     fun choicePhone(): String
-
-    fun buyingPhone(name: String): String
+    suspend fun buyingPhone(name: String)
+    suspend fun salesStatistics()
 }
