@@ -90,7 +90,6 @@ class ShopInCityK(
 
             else -> text = "Такого телефона не существует!"
         }
-
         return text
     }
 

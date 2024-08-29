@@ -3,7 +3,6 @@
 fun main() {
 
 }
-
 enum class PhonePriceInCityN(val value: String, val price: Int){
     MODEL1("Apple iPhone SE 2024 64Gb", 31450),
     MODEL2("Apple iPhone 15 Pro 512Gb", 125515),
